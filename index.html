@@ -189,6 +189,8 @@ body::after{
   align-items:center;
   border:1px solid rgba(255,255,255,0.18);
   z-index:20;
+  /* Prevent blocking clicks before the letter is shown */
+  pointer-events:none;
 }
 
 /* removed paper texture overlay to prevent frame artifacts */
@@ -196,6 +198,8 @@ body::after{
 .card.show{
   transform:translate(-50%,-50%) scale(1);
   opacity:1;
+  /* Enable interactions once visible */
+  pointer-events:auto;
 }
 
 /* ===== DECORATIVE CORNERS ===== */
@@ -549,9 +553,20 @@ footer{
   }
   
   .card{
-    width:94vw;
-    aspect-ratio: 16 / 9;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    transform:none;
+    border-radius:0;
+    aspect-ratio:auto;
     padding:20px 14px;
+    overflow:auto;
+  }
+  /* Ensure show state doesn't re-center on mobile */
+  .card.show{
+    transform:none;
   }
   
   h1{
@@ -767,4 +782,4 @@ function createConfetti(){
   </div>
 </div>
 </body>
-</html>
+</html> 
